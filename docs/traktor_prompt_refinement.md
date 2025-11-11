@@ -76,3 +76,26 @@ Bitte antworte in einem lebendigen, motivierenden Ton, damit der Prozess trotz K
 - **Variationen**: Wechsle zwischen den Varianten, um alternative Lösungsansätze (z. B. stärker skriptbasiert vs. prozessorientiert) zu explorieren. Du kannst die Varianten auch kombinieren, indem du Abschnitte zusammenführst.
 - **Validierung**: Bitte ChatGPT nach Ausführung des Workflows um eine Zusammenfassung der Schritte oder um zusätzliche Tests (z. B. Stichproben in Traktor), um die Ergebnisse zu überprüfen.
 - **Erweiterung**: Falls du mehrere Systeme oder zusätzliche DJ-Software einbeziehst, erweitere die Prompts um entsprechende Hinweise, damit alle relevanten Tools berücksichtigt werden.
+
+## Praxis: Audio-Inventar erzeugen
+Um die Prompts unmittelbar anwenden zu können, steht dir jetzt das ausführbare Hilfsskript `scripts/collect_audio_paths.py` zur Verfügung. Es durchsucht beliebige Verzeichnisse nach gängigen Audioformaten und erstellt daraus die Datei `aalleaudio.txt`, die in jeder Variante als Ausgangsbasis dient.
+
+### Beispielaufrufe
+
+```bash
+# Alle Netzwerk-Freigaben scannen und absolute Pfade erfassen
+python scripts/collect_audio_paths.py /Volumes/NetzwerkMusik ~/Music/Traktor
+
+# Pfade relativ zur externen Festplatte schreiben und Symlinks folgen
+python scripts/collect_audio_paths.py /Volumes/NetzwerkMusik \
+    --relative-to /Volumes/ExterneMusik \
+    --follow-symlinks \
+    --output /Volumes/ExterneMusik/Traktor_Migration/aalleaudio.txt
+
+# Nur spezifische Formate aufnehmen und zuerst testen, ohne eine Datei anzulegen
+python scripts/collect_audio_paths.py /Volumes/NetzwerkMusik \
+    --extensions mp3,flac,wav \
+    --dry-run
+```
+
+Das Skript meldet, wie viele Dateien gefunden wurden, und überschreibt standardmäßig bestehende Inventar-Dateien. Sichere vorhandene Versionen also zuvor oder nutze unterschiedliche Ausgabepfade, wenn du mehrere Varianten vergleichen möchtest.
