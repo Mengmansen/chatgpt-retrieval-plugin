@@ -4,6 +4,10 @@
 # load_dotenv(dotenv_path=env_path, verbose=True)
 
 import pytest
+
+# Optional dependency; skip these tests if unavailable in the environment.
+pytest.importorskip("pydantic", reason="pydantic is required for model definitions")
+
 from models.models import (
     DocumentChunkMetadata,
     DocumentMetadataFilter,

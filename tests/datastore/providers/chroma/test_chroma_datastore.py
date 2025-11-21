@@ -3,6 +3,9 @@ from typing import Dict, List
 import pytest
 import random
 
+# Optional dependency; skip these tests if unavailable in the environment.
+pytest.importorskip("chromadb", reason="chromadb is required for Chroma datastore tests")
+
 from datastore.providers.chroma_datastore import ChromaDataStore
 from models.models import (
     DocumentChunk,

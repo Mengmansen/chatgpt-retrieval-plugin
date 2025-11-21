@@ -1,5 +1,8 @@
 import pytest
 from typing import Dict, List
+
+# Optional dependency; skip these tests if unavailable in the environment.
+pytest.importorskip("dotenv", reason="python-dotenv is required for these tests")
 from dotenv import dotenv_values
 
 from datastore.datastore import DataStore

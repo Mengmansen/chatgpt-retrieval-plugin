@@ -1,5 +1,10 @@
 from typing import Dict, List
 import pytest
+
+# Optional dependencies; skip these tests if unavailable in the environment.
+pytest.importorskip("pydantic", reason="pydantic is required for model definitions")
+pytest.importorskip("loguru", reason="loguru is required for the llama datastore")
+
 from datastore.providers.llama_datastore import LlamaDataStore
 from models.models import DocumentChunk, DocumentChunkMetadata, QueryWithEmbedding
 

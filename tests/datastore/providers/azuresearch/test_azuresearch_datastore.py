@@ -2,6 +2,12 @@ import pytest
 import os
 import time
 from typing import Union
+
+# Optional dependency; skip these tests if unavailable in the environment.
+pytest.importorskip(
+    "azure.search.documents.indexes",
+    reason="azure-search-documents is required for Azure Search tests",
+)
 from azure.search.documents.indexes import SearchIndexClient
 from models.models import (
     DocumentMetadataFilter,

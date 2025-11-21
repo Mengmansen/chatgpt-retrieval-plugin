@@ -2,6 +2,12 @@ import logging
 import os
 
 import pytest
+
+# Optional dependencies; skip these tests if unavailable in the environment.
+pytest.importorskip("pydantic", reason="pydantic is required for model definitions")
+pytest.importorskip("weaviate", reason="weaviate-client is required for Weaviate tests")
+pytest.importorskip("loguru", reason="loguru is required for Weaviate datastore logging")
+
 import weaviate
 from _pytest.logging import LogCaptureFixture
 from fastapi.testclient import TestClient

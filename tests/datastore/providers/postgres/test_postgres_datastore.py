@@ -1,5 +1,10 @@
 from typing import Dict, List
 import pytest
+
+# Optional dependencies; skip these tests if unavailable in the environment.
+pytest.importorskip("pydantic", reason="pydantic is required for model definitions")
+pytest.importorskip("numpy", reason="numpy is required for Postgres datastore tests")
+
 from datastore.providers.postgres_datastore import PostgresDataStore
 from models.models import (
     DocumentChunk,

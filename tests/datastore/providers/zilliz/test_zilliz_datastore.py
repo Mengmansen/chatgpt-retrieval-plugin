@@ -5,6 +5,9 @@
 
 import pytest
 
+# Optional dependencies; skip these tests if unavailable in the environment.
+pytest.importorskip("loguru", reason="loguru is required for Zilliz datastore tests")
+
 from datastore.providers.zilliz_datastore import (
     ZillizDataStore,
 )
