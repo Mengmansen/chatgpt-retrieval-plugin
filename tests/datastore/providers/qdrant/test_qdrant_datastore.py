@@ -1,6 +1,10 @@
 from typing import Dict, List
 
 import pytest
+
+# Optional dependencies; skip these tests if unavailable in the environment.
+pytest.importorskip("pydantic", reason="pydantic is required for model definitions")
+pytest.importorskip("qdrant_client", reason="qdrant-client is required for Qdrant tests")
 import qdrant_client
 from qdrant_client.http.models import PayloadSchemaType
 

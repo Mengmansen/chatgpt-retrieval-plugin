@@ -1,5 +1,10 @@
 from typing import Dict, List
 import pytest
+
+# Optional dependencies; skip these tests if unavailable in the environment.
+pytest.importorskip("pydantic", reason="pydantic is required for model definitions")
+pytest.importorskip("supabase", reason="supabase-py is required for Supabase datastore tests")
+
 from datastore.providers.supabase_datastore import SupabaseDataStore
 from models.models import (
     DocumentChunk,

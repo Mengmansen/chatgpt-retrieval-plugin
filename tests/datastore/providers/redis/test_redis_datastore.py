@@ -1,3 +1,10 @@
+import pytest
+
+# Optional dependencies; skip these tests if unavailable in the environment.
+pytest.importorskip("pydantic", reason="pydantic is required for model definitions")
+pytest.importorskip("redis", reason="redis-py is required for Redis datastore tests")
+pytest.importorskip("numpy", reason="numpy is required for Redis datastore tests")
+
 from datastore.providers.redis_datastore import RedisDataStore
 from models.models import (
     DocumentChunk,
@@ -6,7 +13,6 @@ from models.models import (
     Source,
     DocumentMetadataFilter,
 )
-import pytest
 import redis.asyncio as redis
 import numpy as np
 

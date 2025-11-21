@@ -23,6 +23,9 @@ import time
 from typing import Callable
 import os
 
+# Optional dependency; skip these tests if unavailable in the environment.
+pytest.importorskip("pydantic", reason="pydantic is required for model definitions")
+
 from models.models import (
     DocumentChunkMetadata,
     DocumentMetadataFilter,
