@@ -183,11 +183,23 @@ function Add-SearchRoot {
     }
 }
 
+function Get-PlatformInfo {
+    $osx = [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::OSX)
+    $linux = [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Linux)
+
+    return [pscustomobject]@{
+        IsMacOS = $osx
+        IsLinux = $linux
+    }
+}
+
+$platformInfo = Get-PlatformInfo
+
 Get-PSDrive -PSProvider FileSystem |
     Where-Object { $_.Root } |
     ForEach-Object { Add-SearchRoot -Path $_.Root }
 
-if ($IsMacOS -or $IsLinux) {
+if ($platformInfo.IsMacOS -or $platformInfo.IsLinux) {
     $volumeRoot = '/Volumes'
     if (Test-Path -LiteralPath $volumeRoot) {
         Get-ChildItem -LiteralPath $volumeRoot -Directory -ErrorAction SilentlyContinue |
